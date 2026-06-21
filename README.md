@@ -2,7 +2,9 @@
 
 ## Spam Message Detection using Machine Learning
 
-A web application that uses Natural Language Processing (NLP) and Machine Learning techniques to classify text messages as **SPAM** or **NOT SPAM**.
+DetectSpam is a web application that uses Natural Language Processing (NLP) and Machine Learning techniques to classify text messages as **SPAM** or **HAM (Not Spam)**.
+
+The project combines a complete Data Science workflow, a Machine Learning model, a REST API built with FastAPI, and a web interface developed using HTML, CSS, and JavaScript.
 
 ---
 
@@ -29,32 +31,50 @@ Year:
 
 ---
 
-# Project Description
+# Project Objectives
 
-DetectSpam is a Machine Learning-based web application designed to identify spam messages through supervised learning techniques.
+The primary objective of this project is to design, implement, and evaluate a Machine Learning-based spam detection system capable of automatically classifying SMS messages.
 
-The application allows users to:
+The project applies the complete Data Science lifecycle, including:
 
-* Enter a text message.
-* Receive a classification (SPAM or NOT SPAM).
-* Obtain a confidence score.
-* Receive a brief explanation of the prediction.
-
-The solution combines a Machine Learning model, a REST API built with FastAPI, and a web interface developed using HTML, CSS, and JavaScript.
+* Data acquisition
+* Exploratory Data Analysis (EDA)
+* Text preprocessing
+* Feature engineering
+* Model training
+* Model evaluation
+* Deployment through a web application
 
 ---
 
-# Learning Objectives
+# Solution Architecture
 
-The purpose of this project is to apply the complete Data Science lifecycle in a real-world spam detection scenario, including:
+The solution consists of four main components:
 
-* Data acquisition.
-* Exploratory Data Analysis (EDA).
-* Data preprocessing.
-* Feature engineering.
-* Model training.
-* Model evaluation.
-* Deployment through a web application.
+## Data Layer
+
+Datasets used for training and experimentation:
+
+* SMS Spam Collection Dataset
+* Spambase Dataset
+
+## Machine Learning Layer
+
+* Text Preprocessing
+* TF-IDF Vectorization
+* Multinomial Naive Bayes Classifier
+
+## Backend Layer
+
+* FastAPI
+* REST API Endpoints
+* Prediction Service
+
+## Frontend Layer
+
+* HTML5
+* CSS3
+* JavaScript
 
 ---
 
@@ -64,10 +84,19 @@ The purpose of this project is to apply the complete Data Science lifecycle in a
 DetectSpam/
 │
 ├── app/
+│   ├── __init__.py
 │   ├── main.py
 │   ├── schemas.py
+│   │
 │   ├── services/
+│   │   └── predictor.py
+│   │
 │   ├── ml/
+│   │   ├── __init__.py
+│   │   ├── preprocessing.py
+│   │   ├── train_model.py
+│   │   └── models/
+│   │
 │   ├── templates/
 │   └── static/
 │
@@ -89,7 +118,7 @@ DetectSpam/
 
 ## SMS Spam Collection Dataset
 
-Primary dataset used for model training.
+Primary dataset used for training.
 
 Characteristics:
 
@@ -121,6 +150,33 @@ https://archive.ics.uci.edu/dataset/94/spambase
 
 ---
 
+# Data Science Notebook
+
+The complete Data Science process is documented in:
+
+```text
+notebook/DetectSpam_DataScience_Process.ipynb
+```
+
+The notebook includes:
+
+* Data loading
+* Exploratory Data Analysis (EDA)
+* Class distribution analysis
+* Message length analysis
+* Frequent word analysis
+* Text preprocessing
+* TF-IDF feature engineering
+* Train/Test split
+* Model training
+* Model evaluation
+* Confusion matrix analysis
+* Classification report
+* Prediction examples
+* Conclusions and future work
+
+---
+
 # Technologies
 
 ## Backend
@@ -135,6 +191,11 @@ https://archive.ics.uci.edu/dataset/94/spambase
 * Pandas
 * NumPy
 * Joblib
+
+## Data Science
+
+* Jupyter Notebook
+* Matplotlib
 
 ## Frontend
 
@@ -177,10 +238,10 @@ pip install -r requirements.txt
 # Training the Model
 
 ```bash
-python app/ml/train_model.py
+python -m app.ml.train_model
 ```
 
-The trained model will be generated automatically in:
+The trained model will be stored in:
 
 ```text
 app/ml/models/spam_model.joblib
@@ -208,30 +269,50 @@ http://127.0.0.1:8000/docs
 
 ---
 
-# Current Results
+# Model Performance
 
 Model:
 
 * TF-IDF Vectorizer
 * Multinomial Naive Bayes
 
-Performance:
+Evaluation Results:
 
-| Metric   | Value  |
-| -------- | ------ |
-| Accuracy | 96.05% |
+| Metric    | Value   |
+| --------- | ------- |
+| Accuracy  | 96.05%  |
+| Precision | 100.00% |
+| Recall    | 70.47%  |
+| F1 Score  | 82.68%  |
+
+---
+
+# Confusion Matrix
+
+| Actual / Predicted | Ham | Spam |
+| ------------------ | --- | ---- |
+| Ham                | 966 | 0    |
+| Spam               | 44  | 105  |
+
+Observations:
+
+* No false positives were generated.
+* The classifier is highly conservative when labeling spam messages.
+* Some spam messages remain undetected, impacting recall.
 
 ---
 
 # Future Work
 
-* Precision, Recall and F1 Score evaluation.
-* Confusion Matrix.
-* Metrics Dashboard.
-* Explainable AI (XAI).
-* Transformer-based models.
-* Adversarial spam detection.
-* Integration with Large Language Models (LLMs).
+Potential future improvements include:
+
+* Improving recall while preserving high precision.
+* Evaluating Logistic Regression and Random Forest models.
+* Experimenting with Deep Learning and Transformer-based approaches.
+* Implementing Explainable AI (XAI) techniques.
+* Creating a metrics dashboard.
+* Supporting continuous model retraining.
+* Exploring adversarial spam detection scenarios.
 
 ---
 
@@ -240,6 +321,9 @@ Performance:
 This repository was developed exclusively for educational and academic purposes.
 
 Universidad Icesi
+
 Master's Degree in Artificial Intelligence
-Hacking IA
+
+Hackeando la IA
+
 2026
