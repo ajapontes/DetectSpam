@@ -189,3 +189,49 @@ button:hover {
         grid-template-columns: 1fr;
     }
 }
+
+.confusion-matrix-section {
+    margin-top: 24px;
+}
+
+.confusion-matrix-section h3 {
+    margin-bottom: 12px;
+}
+
+.confusion-matrix-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #e5e7eb;
+}
+
+.confusion-matrix-table th,
+.confusion-matrix-table td {
+    padding: 14px;
+    text-align: center;
+    border: 1px solid #e5e7eb;
+}
+
+.confusion-matrix-table th {
+    background-color: #f1f5f9;
+    color: #334155;
+}
+
+.confusion-matrix-table td {
+    font-weight: bold;
+    color: #1e293b;
+}
+
+.confusion-insight {
+    margin-top: 12px;
+    color: #64748b;
+    font-size: 14px;
+}
+
+#riskText {
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #475569;
+}

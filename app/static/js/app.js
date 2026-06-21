@@ -17,6 +17,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const modelName = document.getElementById("modelName");
     const metricsGeneratedAt = document.getElementById("metricsGeneratedAt");
 
+    const trueNegatives = document.getElementById("trueNegatives");
+    const falsePositives = document.getElementById("falsePositives");
+    const falseNegatives = document.getElementById("falseNegatives");
+    const truePositives = document.getElementById("truePositives");
+    const confusionMatrixInsight = document.getElementById("confusionMatrixInsight");
+
+    const riskText = document.getElementById("riskText");
+
     function formatPercentage(value) {
         return `${(value * 100).toFixed(2)}%`;
     }
@@ -43,6 +51,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
             modelName.textContent = `Model: ${data.model}`;
             metricsGeneratedAt.textContent = `Generated at: ${data.generated_at}`;
+            const matrix = data.confusion_matrix;
+
+            trueNegatives.textContent = matrix.true_negatives;
+            falsePositives.textContent = matrix.false_positives;
+            falseNegatives.textContent = matrix.false_negatives;
+            truePositives.textContent = matrix.true_positives;
+
+            confusionMatrixInsight.textContent =
+                `The model produced ${matrix.false_positives} false positives and ${matrix.false_negatives} false negatives.`;
+                            
         } catch (error) {
             modelName.textContent = error.message;
         }
@@ -90,6 +108,17 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             confidenceText.textContent = `Confidence: ${confidencePercentage}`;
+            let riskLevel = "";
+
+            if (data.confidence < 0.6) {
+                riskLevel = "Low confidence prediction";
+            } else if (data.confidence < 0.8) {
+                riskLevel = "Moderate confidence prediction";
+            } else {
+                riskLevel = "High confidence prediction";
+            }
+
+            riskText.textContent = `Risk level: ${riskLevel}`;
             messageText.textContent = `Analyzed message: ${data.message}`;
             explanationText.textContent = `Explanation: ${data.explanation}`;
         } catch (error) {
@@ -114,6 +143,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         errorMessage.classList.add("hidden");
         errorMessage.textContent = "";
+        riskText.textContent = "";
     });
 
     loadMetrics();

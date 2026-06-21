@@ -23,6 +23,7 @@
             <section id="resultCard" class="result hidden">
                 <h2 id="predictionText"></h2>
                 <p id="confidenceText"></p>
+                <p id="riskText"></p>
                 <p id="messageText"></p>
                 <p id="explanationText"></p>
             </section>
@@ -57,6 +58,33 @@
                 <div class="metrics-meta">
                     <p id="modelName"></p>
                     <p id="metricsGeneratedAt"></p>
+                </div>
+                <div class="confusion-matrix-section">
+                    <h3>Confusion Matrix</h3>
+
+                    <table class="confusion-matrix-table">
+                        <thead>
+                            <tr>
+                                <th>Actual \ Predicted</th>
+                                <th>HAM</th>
+                                <th>SPAM</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>HAM</th>
+                                <td id="trueNegatives">--</td>
+                                <td id="falsePositives">--</td>
+                            </tr>
+                            <tr>
+                                <th>SPAM</th>
+                                <td id="falseNegatives">--</td>
+                                <td id="truePositives">--</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <p id="confusionMatrixInsight" class="confusion-insight"></p>
                 </div>
             </section>
         </section>
