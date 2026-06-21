@@ -1,100 +1,127 @@
 # DetectSpam
 
-> Detección Inteligente de Mensajes SPAM mediante Machine Learning
+## Spam Message Detection using Machine Learning
 
-![Python](https://img.shields.io/badge/Python-3.11-blue)
-![FastAPI](https://img.shields.io/badge/FastAPI-0.116-green)
-![ScikitLearn](https://img.shields.io/badge/Scikit--Learn-ML-orange)
-![Status](https://img.shields.io/badge/Status-MVP-success)
+A web application that uses Natural Language Processing (NLP) and Machine Learning techniques to classify text messages as **SPAM** or **NOT SPAM**.
 
 ---
 
-# Contexto Académico
+# Academic Context
 
-Este proyecto fue desarrollado como parte de la **Maestría en Inteligencia Artificial de la Universidad Icesi** dentro de la asignatura:
+This project was developed as part of the **Master's Degree in Artificial Intelligence** at **Universidad Icesi**, within the course:
 
-## Hackeando la IA
+**Hackeando la IA**
 
-Autores:
+Course Instructor:
+
+**Professor Christian Urcuqui**
+
+Year:
+
+**2026**
+
+---
+
+# Project Team
 
 * Alfredo Aponte
 * Arlex Pino
 
-Año:
+---
 
-* 2026
+# Project Description
+
+DetectSpam is a Machine Learning-based web application designed to identify spam messages through supervised learning techniques.
+
+The application allows users to:
+
+* Enter a text message.
+* Receive a classification (SPAM or NOT SPAM).
+* Obtain a confidence score.
+* Receive a brief explanation of the prediction.
+
+The solution combines a Machine Learning model, a REST API built with FastAPI, and a web interface developed using HTML, CSS, and JavaScript.
 
 ---
 
-# Descripción
+# Learning Objectives
 
-DetectSpam es una aplicación web desarrollada en Python que utiliza técnicas de Procesamiento de Lenguaje Natural (NLP) y Machine Learning para clasificar mensajes como:
+The purpose of this project is to apply the complete Data Science lifecycle in a real-world spam detection scenario, including:
 
-* SPAM
-* NO SPAM
-
-La solución permite que un usuario ingrese un mensaje de texto y obtenga:
-
-* Clasificación automática
-* Nivel de confianza
-* Explicación básica del resultado
-
----
-
-# Objetivo General
-
-Diseñar e implementar una solución de Inteligencia Artificial capaz de identificar mensajes SPAM mediante técnicas de aprendizaje supervisado.
+* Data acquisition.
+* Exploratory Data Analysis (EDA).
+* Data preprocessing.
+* Feature engineering.
+* Model training.
+* Model evaluation.
+* Deployment through a web application.
 
 ---
 
-# Objetivos Específicos
-
-* Construir un pipeline de procesamiento de texto.
-* Implementar técnicas de limpieza y normalización.
-* Entrenar un modelo de clasificación supervisada.
-* Exponer el modelo mediante una API REST.
-* Desarrollar una interfaz web para la interacción con usuarios.
-* Evaluar el desempeño del modelo mediante métricas estándar.
-
----
-
-# Arquitectura de la Solución
+# Repository Structure
 
 ```text
-┌─────────────┐
-│   Usuario   │
-└──────┬──────┘
-       │
-       ▼
-┌─────────────┐
-│ Frontend UI │
-│ HTML/CSS/JS │
-└──────┬──────┘
-       │
-       ▼
-┌─────────────┐
-│   FastAPI   │
-└──────┬──────┘
-       │
-       ▼
-┌─────────────┐
-│ NLP Pipeline│
-└──────┬──────┘
-       │
-       ▼
-┌─────────────┐
-│ Modelo ML   │
-└──────┬──────┘
-       │
-       ▼
-┌─────────────┐
-│ Predicción  │
-└─────────────┘
+DetectSpam/
+│
+├── app/
+│   ├── main.py
+│   ├── schemas.py
+│   ├── services/
+│   ├── ml/
+│   ├── templates/
+│   └── static/
+│
+├── data/
+│   ├── smsspam/
+│   └── spambase/
+│
+├── notebook/
+│   └── DetectSpam_DataScience_Process.ipynb
+│
+├── requirements.txt
+├── README.md
+└── .gitignore
 ```
 
 ---
 
-# Tecnologías Utilizadas
+# Datasets
+
+## SMS Spam Collection Dataset
+
+Primary dataset used for model training.
+
+Characteristics:
+
+* 5,574 SMS messages
+* Binary classification:
+
+  * ham
+  * spam
+
+Source:
+
+https://archive.ics.uci.edu/dataset/228/sms+spam+collection
+
+---
+
+## Spambase Dataset
+
+Secondary dataset included for future experimentation and comparative analysis.
+
+Characteristics:
+
+* 4,601 email messages
+* 57 numerical features
+* Binary spam classification
+
+Source:
+
+https://archive.ics.uci.edu/dataset/94/spambase
+
+---
+
+# Technologies
 
 ## Backend
 
@@ -109,11 +136,6 @@ Diseñar e implementar una solución de Inteligencia Artificial capaz de identif
 * NumPy
 * Joblib
 
-## NLP
-
-* Regex
-* TF-IDF Vectorizer
-
 ## Frontend
 
 * HTML5
@@ -122,152 +144,15 @@ Diseñar e implementar una solución de Inteligencia Artificial capaz de identif
 
 ---
 
-# Dataset Utilizados
+# Installation
 
-## SMS Spam Collection
-
-Dataset principal utilizado para entrenamiento.
-
-Características:
-
-* 5.574 mensajes SMS
-* Clasificación binaria:
-
-  * ham
-  * spam
-
-Fuente:
-
-https://archive.ics.uci.edu/dataset/228/sms+spam+collection
-
----
-
-## Spambase
-
-Dataset complementario incluido para futuras investigaciones y comparaciones.
-
-Características:
-
-* 4.601 correos electrónicos
-* 57 variables numéricas
-* Clasificación binaria spam/no spam
-
-Fuente:
-
-https://archive.ics.uci.edu/dataset/94/spambase
-
----
-
-# Pipeline de Machine Learning
-
-## Preprocesamiento
-
-Se realizan las siguientes transformaciones:
-
-1. Conversión a minúsculas
-2. Eliminación de caracteres especiales
-3. Eliminación de espacios redundantes
-
-Ejemplo:
-
-Entrada:
-
-```text
-Congratulations! You won a FREE prize!!!
-```
-
-Salida:
-
-```text
-congratulations you won a free prize
-```
-
----
-
-## Vectorización
-
-Se utiliza:
-
-```text
-TF-IDF Vectorizer
-```
-
-para transformar texto en características numéricas.
-
----
-
-## Clasificador
-
-Modelo implementado:
-
-```text
-Multinomial Naive Bayes
-```
-
----
-
-# Resultados Iniciales
-
-Entrenamiento realizado sobre SMS Spam Collection.
-
-Resultados obtenidos:
-
-| Métrica  | Valor  |
-| -------- | ------ |
-| Accuracy | 96.05% |
-
----
-
-# Estructura del Proyecto
-
-```text
-DetectSpam/
-│
-├── app/
-│   ├── main.py
-│   ├── schemas.py
-│   │
-│   ├── services/
-│   │   └── predictor.py
-│   │
-│   ├── ml/
-│   │   ├── preprocessing.py
-│   │   ├── train_model.py
-│   │   └── models/
-│   │
-│   ├── templates/
-│   │   └── index.html
-│   │
-│   └── static/
-│       ├── css/
-│       └── js/
-│
-├── data/
-│   ├── smsspam/
-│   └── spambase/
-│
-├── requirements.txt
-├── README.md
-└── .gitignore
-```
-
----
-
-# Instalación
-
-## Clonar repositorio
-
-```bash
-git clone <repository_url>
-```
-
-## Crear entorno virtual
+## Create Virtual Environment
 
 ```bash
 python -m venv .venv
 ```
 
-## Activar entorno virtual
+## Activate Environment
 
 Windows:
 
@@ -275,13 +160,13 @@ Windows:
 .venv\Scripts\activate
 ```
 
-Linux/Mac:
+Linux / macOS:
 
 ```bash
 source .venv/bin/activate
 ```
 
-## Instalar dependencias
+## Install Dependencies
 
 ```bash
 pip install -r requirements.txt
@@ -289,15 +174,13 @@ pip install -r requirements.txt
 
 ---
 
-# Entrenamiento del Modelo
-
-Ejecutar:
+# Training the Model
 
 ```bash
 python app/ml/train_model.py
 ```
 
-El modelo será generado automáticamente en:
+The trained model will be generated automatically in:
 
 ```text
 app/ml/models/spam_model.joblib
@@ -305,21 +188,19 @@ app/ml/models/spam_model.joblib
 
 ---
 
-# Ejecución de la Aplicación
-
-Iniciar FastAPI:
+# Running the Application
 
 ```bash
 uvicorn app.main:app --reload
 ```
 
-Abrir navegador:
+Application URL:
 
 ```text
 http://127.0.0.1:8000
 ```
 
-Swagger:
+Swagger Documentation:
 
 ```text
 http://127.0.0.1:8000/docs
@@ -327,84 +208,38 @@ http://127.0.0.1:8000/docs
 
 ---
 
-# Funcionalidades Implementadas
+# Current Results
 
-## Backend
+Model:
 
-* API REST con FastAPI
-* Endpoint de predicción
-* Endpoint health check
-* Documentación Swagger
+* TF-IDF Vectorizer
+* Multinomial Naive Bayes
 
-## Machine Learning
+Performance:
 
-* Entrenamiento automatizado
-* Persistencia del modelo
-* Clasificación SPAM / NO SPAM
-
-## Frontend
-
-* Interfaz web responsiva
-* Visualización de confianza
-* Explicación básica
-* Botón limpiar
+| Metric   | Value  |
+| -------- | ------ |
+| Accuracy | 96.05% |
 
 ---
 
-# Relación con la Asignatura Hackeando la IA
+# Future Work
 
-La detección de SPAM constituye uno de los primeros problemas de seguridad abordados mediante técnicas de Inteligencia Artificial.
-
-Este proyecto permite comprender conceptos asociados a:
-
-* Clasificación supervisada
-* Ingeniería de características
-* Procesamiento de lenguaje natural
-* Seguridad ofensiva y defensiva
-* Manipulación de entradas adversariales
-* Robustez de modelos de IA
-
-Asimismo, establece una base para futuras investigaciones relacionadas con:
-
-* Prompt Injection
-* Jailbreaking
-* Adversarial Machine Learning
-* Model Poisoning
-* Detección de contenido malicioso
+* Precision, Recall and F1 Score evaluation.
+* Confusion Matrix.
+* Metrics Dashboard.
+* Explainable AI (XAI).
+* Transformer-based models.
+* Adversarial spam detection.
+* Integration with Large Language Models (LLMs).
 
 ---
 
-# Trabajo Futuro
+# License
 
-* Precision
-* Recall
-* F1 Score
-* Matriz de Confusión
-* Dashboard de métricas
-* Historial de análisis
-* Explicaciones XAI
-* Modelos Transformer
-* BERT
-* Detección de mensajes adversariales
-* Integración con LLMs
-
----
-
-# Licencia
-
-Proyecto desarrollado exclusivamente con fines académicos y educativos.
+This repository was developed exclusively for educational and academic purposes.
 
 Universidad Icesi
-Maestría en Inteligencia Artificial
-Asignatura: Hackeando la IA
+Master's Degree in Artificial Intelligence
+Hacking IA
 2026
-
----
-
-# Autores
-
-**Alfredo Aponte**
-Arquitecto SAP BTP | Especialista en IA y Transformación Digital
-
-**Arlex Pino**
-Maestría en Inteligencia Artificial - Universidad Icesi
