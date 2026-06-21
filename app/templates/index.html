@@ -26,6 +26,39 @@
                 <p id="messageText"></p>
                 <p id="explanationText"></p>
             </section>
+            <section class="metrics-section">
+                <h2>Model Metrics</h2>
+                <p class="metrics-subtitle">
+                    Evaluation results generated from the latest model training process.
+                </p>
+
+                <div id="metricsGrid" class="metrics-grid">
+                    <div class="metric-card">
+                        <span class="metric-label">Accuracy</span>
+                        <strong id="accuracyValue">--</strong>
+                    </div>
+
+                    <div class="metric-card">
+                        <span class="metric-label">Precision</span>
+                        <strong id="precisionValue">--</strong>
+                    </div>
+
+                    <div class="metric-card">
+                        <span class="metric-label">Recall</span>
+                        <strong id="recallValue">--</strong>
+                    </div>
+
+                    <div class="metric-card">
+                        <span class="metric-label">F1 Score</span>
+                        <strong id="f1Value">--</strong>
+                    </div>
+                </div>
+
+                <div class="metrics-meta">
+                    <p id="modelName"></p>
+                    <p id="metricsGeneratedAt"></p>
+                </div>
+            </section>
         </section>
     </main>
 
