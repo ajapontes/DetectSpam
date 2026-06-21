@@ -236,10 +236,16 @@ button:hover {
     color: #475569;
 }
 
-<div class="confusion-matrix-image-wrapper">
-    <img
-        src="/models/confusion_matrix.png"
-        alt="Confusion Matrix Heatmap"
-        class="confusion-matrix-image"
-    />
-</div>
+.confusion-matrix-image-wrapper {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.confusion-matrix-image {
+    max-width: 100%;
+    width: 420px;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+    background-color: #ffffff;
+}
