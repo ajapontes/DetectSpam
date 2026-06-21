@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ app_name }}</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <main class="container">
+        <section class="card">
+            <h1>DetectSpam</h1>
+            <p class="subtitle">Analiza mensajes y detecta si podrían ser spam.</p>
+
+            <textarea id="messageInput" placeholder="Escribe o pega aquí el mensaje..."></textarea>
+
+            <div class="button-group">
+                <button id="analyzeButton">Analizar mensaje</button>
+                <button id="clearButton" type="button" class="secondary-button">Limpiar</button>
+            </div>
+            
+            <div id="errorMessage" class="error-message hidden"></div>
+
+            <section id="resultCard" class="result hidden">
+                <h2 id="predictionText"></h2>
+                <p id="confidenceText"></p>
+                <p id="messageText"></p>
+                <p id="explanationText"></p>
+            </section>
+        </section>
+    </main>
+
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
