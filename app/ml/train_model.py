@@ -4,6 +4,7 @@ import json
 
 import joblib
 import pandas as pd
+import matplotlib.pyplot as plt
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics import (
@@ -12,6 +13,7 @@ from sklearn.metrics import (
     recall_score,
     f1_score,
     confusion_matrix,
+    ConfusionMatrixDisplay,
 )
 from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import MultinomialNB
@@ -34,6 +36,9 @@ MODEL_FILE = MODEL_DIR / "spam_model.joblib"
 
 # Model evaluation metrics file
 METRICS_FILE = MODEL_DIR / "metrics.json"
+
+# Confusion matrix image file
+CONFUSION_MATRIX_IMAGE = MODEL_DIR / "confusion_matrix.png"
 
 
 def load_dataset() -> pd.DataFrame:
@@ -114,6 +119,29 @@ def save_metrics(metrics: dict) -> None:
         json.dump(metrics, file, indent=4)
 
 
+def save_confusion_matrix_image(cm) -> None:
+    """
+    Save the confusion matrix as an image file.
+
+    Args:
+        cm: Confusion matrix generated during model evaluation.
+    """
+    fig, ax = plt.subplots(figsize=(6, 6))
+
+    display = ConfusionMatrixDisplay(
+        confusion_matrix=cm,
+        display_labels=["ham", "spam"],
+    )
+
+    display.plot(ax=ax)
+
+    plt.title("Confusion Matrix")
+    plt.tight_layout()
+
+    fig.savefig(CONFUSION_MATRIX_IMAGE)
+    plt.close(fig)
+
+
 def train() -> None:
     """
     Train and persist the spam detection model.
@@ -125,7 +153,7 @@ def train() -> None:
     4. Build a pipeline with TF-IDF vectorization and Multinomial Naive Bayes.
     5. Train the model.
     6. Evaluate the model.
-    7. Save the trained model and evaluation metrics.
+    7. Save the trained model, evaluation metrics, and confusion matrix image.
     """
     print("Loading dataset...")
 
@@ -166,6 +194,13 @@ def train() -> None:
     # Calculate evaluation metrics
     metrics = build_metrics(y_test, predictions)
 
+    # Calculate confusion matrix once for image generation
+    cm = confusion_matrix(
+        y_test,
+        predictions,
+        labels=["ham", "spam"],
+    )
+
     print(f"Accuracy : {metrics['metrics']['accuracy']:.4f}")
     print(f"Precision: {metrics['metrics']['precision']:.4f}")
     print(f"Recall   : {metrics['metrics']['recall']:.4f}")
@@ -180,8 +215,12 @@ def train() -> None:
     # Save metrics
     save_metrics(metrics)
 
-    print(f"Model saved at  : {MODEL_FILE}")
-    print(f"Metrics saved at: {METRICS_FILE}")
+    # Save confusion matrix image
+    save_confusion_matrix_image(cm)
+
+    print(f"Model saved at                 : {MODEL_FILE}")
+    print(f"Metrics saved at               : {METRICS_FILE}")
+    print(f"Confusion matrix image saved at: {CONFUSION_MATRIX_IMAGE}")
 
 
 if __name__ == "__main__":

@@ -49,7 +49,7 @@ The project applies the complete Data Science lifecycle, including:
 
 # Solution Architecture
 
-The solution consists of four main components:
+The solution consists of four main components.
 
 ## Data Layer
 
@@ -63,18 +63,24 @@ Datasets used for training and experimentation:
 * Text Preprocessing
 * TF-IDF Vectorization
 * Multinomial Naive Bayes Classifier
+* Metrics Generation
+* Model Persistence
+* Metrics Persistence
 
 ## Backend Layer
 
 * FastAPI
 * REST API Endpoints
 * Prediction Service
+* Metrics Service
 
 ## Frontend Layer
 
 * HTML5
 * CSS3
 * JavaScript
+* Metrics Dashboard
+* Confusion Matrix Visualization
 
 ---
 
@@ -89,13 +95,16 @@ DetectSpam/
 │   ├── schemas.py
 │   │
 │   ├── services/
-│   │   └── predictor.py
+│   │   ├── predictor.py
+│   │   └── metrics.py
 │   │
 │   ├── ml/
 │   │   ├── __init__.py
 │   │   ├── preprocessing.py
 │   │   ├── train_model.py
 │   │   └── models/
+│   │       ├── metrics.json
+│   │       └── spam_model.joblib (generated)
 │   │
 │   ├── templates/
 │   └── static/
@@ -173,7 +182,8 @@ The notebook includes:
 * Confusion matrix analysis
 * Classification report
 * Prediction examples
-* Conclusions and future work
+* Conclusions
+* Future work
 
 ---
 
@@ -241,11 +251,21 @@ pip install -r requirements.txt
 python -m app.ml.train_model
 ```
 
-The trained model will be stored in:
+The training process generates:
 
 ```text
 app/ml/models/spam_model.joblib
+app/ml/models/metrics.json
 ```
+
+The metrics file contains:
+
+* Accuracy
+* Precision
+* Recall
+* F1 Score
+* Confusion Matrix
+* Generation Timestamp
 
 ---
 
@@ -266,6 +286,17 @@ Swagger Documentation:
 ```text
 http://127.0.0.1:8000/docs
 ```
+
+---
+
+# API Endpoints
+
+| Method | Endpoint | Description              |
+| ------ | -------- | ------------------------ |
+| GET    | /        | Web interface            |
+| GET    | /health  | Health check             |
+| GET    | /metrics | Model evaluation metrics |
+| POST   | /predict | Spam prediction          |
 
 ---
 
@@ -302,6 +333,22 @@ Observations:
 
 ---
 
+# Metrics Dashboard
+
+The web interface includes a real-time metrics dashboard displaying:
+
+* Accuracy
+* Precision
+* Recall
+* F1 Score
+* Confusion Matrix
+* Model Information
+* Metrics Generation Timestamp
+
+Metrics are loaded dynamically from the `/metrics` endpoint and reflect the most recent model training execution.
+
+---
+
 # Future Work
 
 Potential future improvements include:
@@ -310,8 +357,9 @@ Potential future improvements include:
 * Evaluating Logistic Regression and Random Forest models.
 * Experimenting with Deep Learning and Transformer-based approaches.
 * Implementing Explainable AI (XAI) techniques.
-* Creating a metrics dashboard.
-* Supporting continuous model retraining.
+* Supporting model versioning.
+* Implementing automatic retraining pipelines.
+* Supporting multilingual spam detection.
 * Exploring adversarial spam detection scenarios.
 
 ---

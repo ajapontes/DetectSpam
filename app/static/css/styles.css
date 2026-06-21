@@ -235,3 +235,11 @@ button:hover {
     font-weight: bold;
     color: #475569;
 }
+
+<div class="confusion-matrix-image-wrapper">
+    <img
+        src="/models/confusion_matrix.png"
+        alt="Confusion Matrix Heatmap"
+        class="confusion-matrix-image"
+    />
+</div>

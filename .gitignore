@@ -12,6 +12,7 @@ __pycache__/
 
 # DetectSpam - generated ML artifacts
 app/ml/models/*.joblib
+app/ml/models/*.png
 
 # DetectSpam - keep datasets for reproducibility
 !data/
