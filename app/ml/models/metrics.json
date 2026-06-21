@@ -1,0 +1,31 @@
+{
+    "model": "TF-IDF + Multinomial Naive Bayes",
+    "generated_at": "2026-06-21T00:23:25",
+    "dataset": "SMS Spam Collection",
+    "metrics": {
+        "accuracy": 0.9605,
+        "precision": 1.0,
+        "recall": 0.7047,
+        "f1_score": 0.8268
+    },
+    "confusion_matrix": {
+        "labels": [
+            "ham",
+            "spam"
+        ],
+        "matrix": [
+            [
+                966,
+                0
+            ],
+            [
+                44,
+                105
+            ]
+        ],
+        "true_negatives": 966,
+        "false_positives": 0,
+        "false_negatives": 44,
+        "true_positives": 105
+    }
+}

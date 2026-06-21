@@ -22,5 +22,6 @@ app/ml/models/*.joblib
 !data/spambase/spambase.data
 !data/spambase/spambase.names
 !data/spambase/spambase.DOCUMENTATION
+!app/ml/models/metrics.json
 
 .vscode/

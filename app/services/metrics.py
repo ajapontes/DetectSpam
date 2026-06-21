@@ -1,28 +1,37 @@
-"""
-Model evaluation metrics for DetectSpam.
+from pathlib import Path
+import json
 
-These metrics were obtained from the Data Science notebook using the
-SMS Spam Collection test dataset.
-"""
+
+# Path to the generated metrics file
+METRICS_FILE = (
+    Path(__file__).resolve().parents[1]
+    / "ml"
+    / "models"
+    / "metrics.json"
+)
 
 
 def get_model_metrics() -> dict:
     """
-    Return the current model evaluation metrics.
+    Load model evaluation metrics from the generated JSON file.
+
+    The metrics file is created during model training by running:
+    python -m app.ml.train_model
 
     Returns:
-        dict: Model performance metrics and confusion matrix values.
+        dict: Model evaluation metrics.
+
+    Raises:
+        FileNotFoundError: If metrics.json has not been generated yet.
     """
-    return {
-        "model": "TF-IDF + Multinomial Naive Bayes",
-        "accuracy": 0.9605,
-        "precision": 1.0000,
-        "recall": 0.7047,
-        "f1_score": 0.8268,
-        "confusion_matrix": {
-            "true_negatives": 966,
-            "false_positives": 0,
-            "false_negatives": 44,
-            "true_positives": 105,
-        },
-    }
+    if not METRICS_FILE.exists():
+        return {
+            "status": "not_available",
+            "message": (
+                "Metrics file was not found. "
+                "Run 'python -m app.ml.train_model' to generate it."
+            ),
+        }
+
+    with open(METRICS_FILE, "r", encoding="utf-8") as file:
+        return json.load(file)
