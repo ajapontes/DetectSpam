@@ -5,7 +5,7 @@ from fastapi.templating import Jinja2Templates
 
 from app.schemas import PredictionRequest, PredictionResponse
 from app.services.predictor import predictor
-
+from app.services.metrics import get_model_metrics
 
 # Create the FastAPI application instance
 app = FastAPI(
@@ -55,6 +55,18 @@ def health_check():
         "message": "DetectSpam API is running",
     }
 
+@app.get("/metrics")
+def model_metrics():
+    """
+    Return model evaluation metrics.
+
+    These metrics were calculated during the Data Science evaluation process
+    using the SMS Spam Collection test dataset.
+
+    Returns:
+        dict: Model name, evaluation metrics, and confusion matrix values.
+    """
+    return get_model_metrics()
 
 @app.post("/predict", response_model=PredictionResponse)
 def predict_spam(request: PredictionRequest):
