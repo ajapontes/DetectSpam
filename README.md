@@ -105,7 +105,7 @@ DetectSpam/
 │   └── spambase/
 │
 ├── notebook/
-│   └── DetectSpam_DataScience_Process.ipynb
+│   └── DetectSpam_Process.ipynb
 │
 ├── requirements.txt
 ├── README.md
@@ -155,7 +155,7 @@ https://archive.ics.uci.edu/dataset/94/spambase
 The complete Data Science process is documented in:
 
 ```text
-notebook/DetectSpam_DataScience_Process.ipynb
+notebook/DetectSpam_Process.ipynb
 ```
 
 The notebook includes:
